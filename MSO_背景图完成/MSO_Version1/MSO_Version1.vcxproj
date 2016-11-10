@@ -1,0 +1,222 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{71F3EC22-C3AD-4255-A2B3-092AA6FB6750}</ProjectGuid>
+    <RootNamespace>MSO_Version1</RootNamespace>
+    <Keyword>MFCProj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+    <UseOfMfc>Dynamic</UseOfMfc>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+    <UseOfMfc>Dynamic</UseOfMfc>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <IncludePath>C:\Program Files (x86)\IVI Foundation\VISA\WinNT\Include;$(IncludePath)</IncludePath>
+    <ReferencePath>C:\Program Files (x86)\IVI Foundation\VISA\WinNT\Lib_x64\msc;$(ReferencePath)</ReferencePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ShowProgress>LinkVerboseCLR</ShowProgress>
+      <AdditionalDependencies>visa32.lib</AdditionalDependencies>
+    </Link>
+    <Midl>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <ValidateAllParameters>true</ValidateAllParameters>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </Midl>
+    <ResourceCompile>
+      <Culture>0x0804</Culture>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+    <Midl>
+      <MkTypLibCompatible>false</MkTypLibCompatible>
+      <ValidateAllParameters>true</ValidateAllParameters>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </Midl>
+    <ResourceCompile>
+      <Culture>0x0804</Culture>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <None Include="..\MDO按钮位图\FreqMenu\freqdemod1.bmp" />
+    <None Include="..\MDO按钮位图\FreqMenu\freqdemod2.bmp" />
+    <None Include="..\MDO按钮位图\FreqMenu\FreqDemodCHildDlgBk.bmp" />
+    <None Include="..\MDO按钮位图\FreqMenu\FreqLightTrack1.bmp" />
+    <None Include="..\MDO按钮位图\mainmenu\addmeasure1.bmp" />
+    <None Include="..\MDO按钮位图\mainmenu\addmeasure2.bmp" />
+    <None Include="..\mdo按钮位图\mainmenu\bitmap1.bmp" />
+    <None Include="..\MDO按钮位图\mainmenu\choosedomain1.bmp" />
+    <None Include="..\MDO按钮位图\mainmenu\choosedomain2.bmp" />
+    <None Include="..\MDO按钮位图\mainmenu\DeleteChildDBk.bmp" />
+    <None Include="..\MDO按钮位图\mainmenu\deletemeasur1.bmp" />
+    <None Include="..\MDO按钮位图\mainmenu\deletemeasure2.bmp" />
+    <None Include="..\MDO按钮位图\mainmenu\delete_choose.bmp" />
+    <None Include="..\MDO按钮位图\mainmenu\delete_deleteall.bmp" />
+    <None Include="..\MDO按钮位图\mainmenu\delete_ok.bmp" />
+    <None Include="..\MDO按钮位图\mainmenu\freqchoose.bmp" />
+    <None Include="..\MDO按钮位图\mainmenu\freqchoose1.bmp" />
+    <None Include="..\MDO按钮位图\mainmenu\freqchooseconf.bmp" />
+    <None Include="..\MDO按钮位图\mainmenu\FreqChooseDlgBk.bmp" />
+    <None Include="..\MDO按钮位图\mainmenu\Histogram1.bmp" />
+    <None Include="..\MDO按钮位图\mainmenu\Histogram2.bmp" />
+    <None Include="..\MDO按钮位图\mainmenu\histogramhistDlgBk.bmp" />
+    <None Include="..\MDO按钮位图\mainmenu\histogram_hist1.bmp" />
+    <None Include="..\MDO按钮位图\mainmenu\histogram_hist2.bmp" />
+    <None Include="..\MDO按钮位图\mainmenu\histogram_hist3.bmp" />
+    <None Include="..\MDO按钮位图\mainmenu\histogram_page1.bmp" />
+    <None Include="..\MDO按钮位图\mainmenu\histogram_page2.bmp" />
+    <None Include="..\MDO按钮位图\mainmenu\histogram_reset.bmp" />
+    <None Include="..\MDO按钮位图\mainmenu\histogram_show1.bmp" />
+    <None Include="..\MDO按钮位图\mainmenu\histogram_show2.bmp" />
+    <None Include="..\MDO按钮位图\mainmenu\histogram_source.bmp" />
+    <None Include="..\MDO按钮位图\mainmenu\histogram_standardlimit.bmp" />
+    <None Include="..\MDO按钮位图\mainmenu\histogram_verticallimit.bmp" />
+    <None Include="..\MDO按钮位图\mainmenu\Indicator1.bmp" />
+    <None Include="..\MDO按钮位图\mainmenu\More.bmp" />
+    <None Include="..\MDO按钮位图\mainmenu\morechilddlg.bmp" />
+    <None Include="..\MDO按钮位图\mainmenu\morechoosedlgbk.bmp" />
+    <None Include="..\MDO按钮位图\mainmenu\moreleveldlgbk.bmp" />
+    <None Include="..\MDO按钮位图\mainmenu\moremethoddlgbk.bmp" />
+    <None Include="..\MDO按钮位图\mainmenu\morestatisticsdlgbk.bmp" />
+    <None Include="..\MDO按钮位图\mainmenu\more_choose1.bmp" />
+    <None Include="..\MDO按钮位图\mainmenu\more_choose2.bmp" />
+    <None Include="..\MDO按钮位图\mainmenu\more_level1.bmp" />
+    <None Include="..\MDO按钮位图\mainmenu\more_level2.bmp" />
+    <None Include="..\MDO按钮位图\mainmenu\more_level_highreflevel.bmp" />
+    <None Include="..\MDO按钮位图\mainmenu\more_level_lowreflevel.bmp" />
+    <None Include="..\MDO按钮位图\mainmenu\more_level_medreflevel.bmp" />
+    <None Include="..\MDO按钮位图\mainmenu\more_level_setdefault.bmp" />
+    <None Include="..\MDO按钮位图\mainmenu\more_level_setlevel1.bmp" />
+    <None Include="..\MDO按钮位图\mainmenu\more_level_setlevel2.bmp" />
+    <None Include="..\MDO按钮位图\mainmenu\more_method1.bmp" />
+    <None Include="..\MDO按钮位图\mainmenu\more_method2.bmp" />
+    <None Include="..\MDO按钮位图\mainmenu\more_statistics1.bmp" />
+    <None Include="..\MDO按钮位图\mainmenu\more_statistics2.bmp" />
+    <None Include="..\MDO按钮位图\mainmenu\more_statistics_averge.bmp" />
+    <None Include="..\MDO按钮位图\mainmenu\more_statistics_reset1.bmp" />
+    <None Include="..\MDO按钮位图\mainmenu\more_statistics_reset2.bmp" />
+    <None Include="..\MDO按钮位图\mainmenu\more_statistics_statis1.bmp" />
+    <None Include="..\MDO按钮位图\mainmenu\more_statistics_statis2.bmp" />
+    <None Include="..\MDO按钮位图\mainmenu\ShowCursorInScr.bmp" />
+    <None Include="..\MDO按钮位图\tek1.bmp" />
+    <None Include="ReadMe.txt" />
+    <None Include="res\MSO_Version1.ico" />
+    <None Include="res\MSO_Version1.rc2" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="BtnST.h" />
+    <ClInclude Include="global.h" />
+    <ClInclude Include="MSOBtDeleteChildDlg.h" />
+    <ClInclude Include="MSOBtFreqChooseDlg.h" />
+    <ClInclude Include="MSOBtFreqDemodChildDlg.h" />
+    <ClInclude Include="MSOBtHistogramDlg.h" />
+    <ClInclude Include="MSOBtMoreChildDlg.h" />
+    <ClInclude Include="MSOBtMoreChooseDlg.h" />
+    <ClInclude Include="MSOBtMoreLevelDlg.h" />
+    <ClInclude Include="MSOBtMoreMethodDlg.h" />
+    <ClInclude Include="MSOBtMoreStatisticsDlg.h" />
+    <ClInclude Include="MSOFreqMainMenuDlg.h" />
+    <ClInclude Include="MSOMainMenuDlg.h" />
+    <ClInclude Include="MSOWave.h" />
+    <ClInclude Include="MSOWaveFreq.h" />
+    <ClInclude Include="MSO_Version1.h" />
+    <ClInclude Include="MSO_Version1Dlg.h" />
+    <ClInclude Include="Resource.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="targetver.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="BtnST.cpp" />
+    <ClCompile Include="global.cpp" />
+    <ClCompile Include="MSOBtDeleteChildDlg.cpp" />
+    <ClCompile Include="MSOBtFreqChooseDlg.cpp" />
+    <ClCompile Include="MSOBtFreqDemodChildDlg.cpp" />
+    <ClCompile Include="MSOBtHistogramDlg.cpp" />
+    <ClCompile Include="MSOBtMoreChildDlg.cpp" />
+    <ClCompile Include="MSOBtMoreChooseDlg.cpp" />
+    <ClCompile Include="MSOBtMoreLevelDlg.cpp" />
+    <ClCompile Include="MSOBtMoreMethodDlg.cpp" />
+    <ClCompile Include="MSOBtMoreStatisticsDlg.cpp" />
+    <ClCompile Include="MSOFreqMainMenuDlg.cpp" />
+    <ClCompile Include="MSOMainMenuDlg.cpp" />
+    <ClCompile Include="MSOWave.cpp" />
+    <ClCompile Include="MSOWaveFreq.cpp" />
+    <ClCompile Include="MSO_Version1.cpp" />
+    <ClCompile Include="MSO_Version1Dlg.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="MSO_Version1.rc" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties RESOURCE_FILE="MSO_Version1.rc" />
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

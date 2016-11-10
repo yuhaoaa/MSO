@@ -1,0 +1,332 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ReadMe.txt" />
+    <None Include="res\MSO_Version1.rc2">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="res\MSO_Version1.ico">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="..\MDO按钮位图\tek1.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="..\MDO按钮位图\mainmenu\choosedomain1.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="..\MDO按钮位图\mainmenu\choosedomain2.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="..\MDO按钮位图\mainmenu\addmeasure1.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="..\MDO按钮位图\mainmenu\addmeasure2.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="..\MDO按钮位图\mainmenu\deletemeasur1.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="..\MDO按钮位图\mainmenu\deletemeasure2.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="..\MDO按钮位图\mainmenu\Indicator1.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="..\MDO按钮位图\mainmenu\Histogram1.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="..\MDO按钮位图\mainmenu\Histogram2.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="..\MDO按钮位图\mainmenu\More.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="..\MDO按钮位图\mainmenu\ShowCursorInScr.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="..\MDO按钮位图\mainmenu\morechilddlg.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="..\MDO按钮位图\mainmenu\more_statistics2.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="..\MDO按钮位图\mainmenu\more_statistics1.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="..\MDO按钮位图\mainmenu\more_choose1.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="..\MDO按钮位图\mainmenu\more_choose2.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="..\MDO按钮位图\mainmenu\more_level1.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="..\MDO按钮位图\mainmenu\more_level2.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="..\MDO按钮位图\mainmenu\more_method1.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="..\MDO按钮位图\mainmenu\more_method2.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="..\MDO按钮位图\mainmenu\moremethoddlgbk.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="..\MDO按钮位图\mainmenu\morestatisticsdlgbk.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="..\MDO按钮位图\mainmenu\more_statistics_statis1.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="..\MDO按钮位图\mainmenu\more_statistics_averge.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="..\MDO按钮位图\mainmenu\more_statistics_reset1.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="..\MDO按钮位图\mainmenu\more_statistics_reset2.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="..\MDO按钮位图\mainmenu\more_statistics_statis2.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="..\MDO按钮位图\mainmenu\morechoosedlgbk.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="..\MDO按钮位图\mainmenu\moreleveldlgbk.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="..\MDO按钮位图\mainmenu\more_level_setlevel1.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="..\MDO按钮位图\mainmenu\more_level_setlevel2.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="..\MDO按钮位图\mainmenu\more_level_highreflevel.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="..\MDO按钮位图\mainmenu\more_level_medreflevel.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="..\MDO按钮位图\mainmenu\more_level_lowreflevel.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="..\MDO按钮位图\mainmenu\more_level_setdefault.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="..\MDO按钮位图\mainmenu\histogramhistDlgBk.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="..\MDO按钮位图\mainmenu\histogram_hist1.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="..\MDO按钮位图\mainmenu\histogram_source.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="..\MDO按钮位图\mainmenu\histogram_standardlimit.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="..\MDO按钮位图\mainmenu\histogram_verticallimit.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="..\MDO按钮位图\mainmenu\histogram_page1.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="..\MDO按钮位图\mainmenu\histogram_hist2.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="..\MDO按钮位图\mainmenu\histogram_hist3.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="..\MDO按钮位图\mainmenu\histogram_show1.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="..\MDO按钮位图\mainmenu\histogram_reset.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="..\mdo按钮位图\mainmenu\bitmap1.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="..\MDO按钮位图\mainmenu\histogram_page2.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="..\MDO按钮位图\mainmenu\histogram_show2.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="..\MDO按钮位图\mainmenu\delete_deleteall.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="..\MDO按钮位图\mainmenu\DeleteChildDBk.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="..\MDO按钮位图\mainmenu\delete_choose.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="..\MDO按钮位图\mainmenu\delete_ok.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="..\MDO按钮位图\mainmenu\freqchoose.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="..\MDO按钮位图\mainmenu\FreqChooseDlgBk.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="..\MDO按钮位图\mainmenu\freqchoose1.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="..\MDO按钮位图\mainmenu\freqchooseconf.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="..\MDO按钮位图\FreqMenu\FreqLightTrack1.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="..\MDO按钮位图\FreqMenu\freqdemod1.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="..\MDO按钮位图\FreqMenu\FreqDemodCHildDlgBk.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+    <None Include="..\MDO按钮位图\FreqMenu\freqdemod2.bmp">
+      <Filter>资源文件</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="MSO_Version1.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="MSO_Version1Dlg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="MSOWave.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="BtnST.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="MSOMainMenuDlg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="MSOBtMoreChildDlg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="MSOBtMoreMethodDlg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="MSOBtMoreStatisticsDlg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="MSOBtMoreChooseDlg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="MSOBtMoreLevelDlg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="MSOBtHistogramDlg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="MSOBtDeleteChildDlg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="MSOBtFreqChooseDlg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="MSOWaveFreq.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="global.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="MSOFreqMainMenuDlg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="MSOBtFreqDemodChildDlg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="MSO_Version1.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MSO_Version1Dlg.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MSOWave.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="BtnST.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MSOMainMenuDlg.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MSOBtMoreChildDlg.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MSOBtMoreMethodDlg.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MSOBtMoreStatisticsDlg.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MSOBtMoreChooseDlg.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MSOBtMoreLevelDlg.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MSOBtHistogramDlg.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MSOBtDeleteChildDlg.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MSOBtFreqChooseDlg.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MSOWaveFreq.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="global.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MSOFreqMainMenuDlg.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="MSOBtFreqDemodChildDlg.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="MSO_Version1.rc">
+      <Filter>资源文件</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

@@ -4,14 +4,14 @@
 #include "stdafx.h"
 #include "MSO_Version1.h"
 #include "MSOWaveFreq.h"
-
+#include "math.h"
 #include "global.h"
 
 // MSOWaveFreq
 
 IMPLEMENT_DYNAMIC(MSOWaveFreq, CWnd)
 
-MSOWaveFreq::MSOWaveFreq()
+	MSOWaveFreq::MSOWaveFreq()
 {
 	m_crGridColor = RGB(148,138,107);
 	m_brushBack.CreateSolidBrush(RGB(0,0,0));
@@ -21,6 +21,9 @@ MSOWaveFreq::MSOWaveFreq()
 	m_penBlack1.CreatePen(PS_SOLID,1,RGB(255,255,0));
 	m_FreqWavePenCH1.CreatePen(PS_SOLID, 1, RGB(255,130,0));
 	//OpenDevice();
+	RecBuf = new unsigned char [7515];
+	allData = new unsigned  char[7515];
+	//CenterFreqBuf = new unsigned char [13];
 }
 
 MSOWaveFreq::~MSOWaveFreq()
@@ -78,46 +81,46 @@ void MSOWaveFreq::InitialBackGround()
 	CString Yparameter[10]={_T("0.00dBm"),_T("-10.0"),_T("-20.0"),_T("-30.0"),_T("-40.0"),_T("-50.0"),_T("-60.0"),
 		_T("-70.0"),_T("-80.0"),_T("-90.0")};
 
-		//突出纵向的大格
-		for(int i = nYBigGap; i <m_rcCanvas.Height() ;i += nYBigGap)  
+	//突出纵向的大格
+	for(int i = nYBigGap; i <m_rcCanvas.Height() ;i += nYBigGap)  
+	{
+		m_dcGrid.MoveTo(m_rcCanvas.left , m_rcCanvas.top + i);
+		m_dcGrid.LineTo(m_rcCanvas.left + 7, m_rcCanvas.top + i);
+		m_dcGrid.MoveTo(m_rcCanvas.right - 7, m_rcCanvas.top + i);
+		m_dcGrid.LineTo(m_rcCanvas.right, m_rcCanvas.top + i);
+	}
+	//纵向点的绘制
+	for(int j = nXBigGap; j <= m_rcCanvas.Width(); j += nXBigGap)
+	{
+		for(int x=0;x<m_rcCanvas.Height();x+=2)
 		{
-			m_dcGrid.MoveTo(m_rcCanvas.left , m_rcCanvas.top + i);
-			m_dcGrid.LineTo(m_rcCanvas.left + 7, m_rcCanvas.top + i);
-			m_dcGrid.MoveTo(m_rcCanvas.right - 7, m_rcCanvas.top + i);
-			m_dcGrid.LineTo(m_rcCanvas.right, m_rcCanvas.top + i);
+			m_dcGrid.SetPixel(m_rcCanvas.left + j, m_rcCanvas.top + x, m_crGridColor);
 		}
-		//纵向点的绘制
-		for(int j = nXBigGap; j <= m_rcCanvas.Width(); j += nXBigGap)
+	}
+	//坐标参数绘制
+	m_dcGrid.SetBkMode(TRANSPARENT);
+	m_dcGrid.SetTextColor(RGB(148,138,107));
+	m_dcGrid.TextOut(15,0,Yparameter[0]);
+	for (int i=1; i<10; i++)
+	{
+		m_dcGrid.TextOut(15,i*nYBigGap-8,Yparameter[i]);
+	}
+	//突出横向的大格
+	for(int i = nXBigGap; i <m_rcCanvas.Width() ;i += nXBigGap)  
+	{
+		m_dcGrid.MoveTo(m_rcCanvas.left + i, m_rcCanvas.top);
+		m_dcGrid.LineTo(m_rcCanvas.left + i, m_rcCanvas.top + 7);
+		m_dcGrid.MoveTo(m_rcCanvas.left + i, m_rcCanvas.bottom - 7);
+		m_dcGrid.LineTo(m_rcCanvas.left + i, m_rcCanvas.bottom);
+	}
+	//横向点的绘制
+	for(int j = nYBigGap; j < m_rcCanvas.Height(); j+=nYBigGap)
+	{
+		for(int y=0;y<m_rcCanvas.Width();y+=2)
 		{
-			for(int x=0;x<m_rcCanvas.Height();x+=2)
-			{
-				m_dcGrid.SetPixel(m_rcCanvas.left + j, m_rcCanvas.top + x, m_crGridColor);
-			}
+			m_dcGrid.SetPixel(m_rcCanvas.left +50+ y, m_rcCanvas.top + j, m_crGridColor);
 		}
-		//坐标参数绘制
-		m_dcGrid.SetBkMode(TRANSPARENT);
-		m_dcGrid.SetTextColor(RGB(148,138,107));
-		m_dcGrid.TextOut(15,0,Yparameter[0]);
-		for (int i=1; i<10; i++)
-		{
-			m_dcGrid.TextOut(15,i*nYBigGap-8,Yparameter[i]);
-		}
-		//突出横向的大格
-		for(int i = nXBigGap; i <m_rcCanvas.Width() ;i += nXBigGap)  
-		{
-			m_dcGrid.MoveTo(m_rcCanvas.left + i, m_rcCanvas.top);
-			m_dcGrid.LineTo(m_rcCanvas.left + i, m_rcCanvas.top + 7);
-			m_dcGrid.MoveTo(m_rcCanvas.left + i, m_rcCanvas.bottom - 7);
-			m_dcGrid.LineTo(m_rcCanvas.left + i, m_rcCanvas.bottom);
-		}
-		//横向点的绘制
-		for(int j = nYBigGap; j < m_rcCanvas.Height(); j+=nYBigGap)
-		{
-			for(int y=0;y<m_rcCanvas.Width();y+=2)
-			{
-				m_dcGrid.SetPixel(m_rcCanvas.left +50+ y, m_rcCanvas.top + j, m_crGridColor);
-			}
-		}	
+	}	
 
 	m_dcGrid.SelectObject(m_oldPen);
 	//从背景DC拷贝图像到做图dc
@@ -203,30 +206,103 @@ void MSOWaveFreq::ChooseFreqDemod()
 	}
 }
 
-unsigned char*  MSOWaveFreq::ReadData()
+//对频谱仪程控读写
+//strCmd: 要写入的程控指令
+//len: 传回的字节数目
+//WriteOrRead: Ture为读写指令， False为只写指令
+unsigned char * MSOWaveFreq::WriteReadData(CString strCmd ,INT len, BOOL WriteOrRead)
+{
+	ViUInt32 retCount;
+	//char* SendBuf = NULL;
+	ViPChar SendBuf= NULL;
+	SendBuf = strCmd.GetBuffer(strCmd.GetLength());
+	strcpy(SendBuf,strCmd);
+	status2 = viWrite(instr, (unsigned char *)SendBuf, strlen(strCmd), &retCount);
+	if (WriteOrRead == TRUE)
+	{
+		unsigned char *GetBuf = new unsigned char [len];
+		status = viRead(instr, GetBuf, len, &retCount);//RecBuf为接收数据存储器，retCount为接收数据的大小
+		GetBuf[len] = '\0';
+		return GetBuf;
+	}
+	else
+	{
+		return NULL;
+	}
+}
+
+unsigned char*  MSOWaveFreq::ReadFreqData()
 {
 	ViUInt32 retCount;
 	char* SendBuf = NULL;
-	ViPChar SendBuf1= NULL;
-	ViPChar SendBuf2= NULL;
 	CString strCmd = "TRACe:DATA? TRACE1\n";        //读取通道1迹线数据
 	SendBuf = strCmd.GetBuffer(strCmd.GetLength());
 	strcpy(SendBuf,strCmd);
 	status2 = viWrite(instr, (unsigned char *)SendBuf, strlen(strCmd), &retCount);
 
 	//unsigned char RecBuf[15015];    //采用静态分配在分解数据时在472（972）个数据时会出现指针错误，why？
-	unsigned char *RecBuf = new unsigned char [7515];
-	//unsigned char *RecBuf = new unsigned char [15015];
+	//unsigned char *RecBuf = new unsigned char [7515];
 	status = viRead(instr, RecBuf, 7515, &retCount);//RecBuf为接收数据存储器，retCount为接收数据的大小
-
+	//unsigned char *RecBuf = WriteReadData(strCmd ,7515, TRUE);
 	return RecBuf;
+}
 
+double MSOWaveFreq::ReadCenterFreqData()
+{
+// 	ViUInt32 retCount;
+// 	char* SendBuf = NULL;
+// 	CString strCmd = "SENSe:FREQuency:CENTer?\n";        //读取中心频率数据
+// 	SendBuf = strCmd.GetBuffer(strCmd.GetLength());
+// 	strcpy(SendBuf,strCmd);
+// 	status2 = viWrite(instr, (unsigned char *)SendBuf, strlen(strCmd), &retCount);
+// 	unsigned char *CenterFreqBuf = new unsigned char [13];
+// 	status = viRead(instr, CenterFreqBuf, 13, &retCount);//RecBuf为接收数据存储器，retCount为接收数据的大小
+// 	//CenterFreqBuf[13] = '\0';
+	CString strCmd = "SENSe:FREQuency:CENTer?\n";        //读取中心频率数据
+	unsigned char *CenterFreqBuf = WriteReadData(strCmd ,13, TRUE);
+
+// 	char *singleData = new char[7];
+// 	const char *delim = "e";  
+// 	singleData = strtok((char*)CenterFreqBuf, delim);
+// 	float doubData[2];
+// 	doubData[0] = atof(singleData);
+// 	singleData = strtok(NULL,delim);
+// 	doubData[1] = atof(singleData);
+	double CenterFreqData = DataProcess(CenterFreqBuf);
+	return CenterFreqData;
+}
+double MSOWaveFreq::ReadStartFreqData()
+{
+	CString strCmd = "SENSe:FREQuency:STARt?\n";        //读取中心频率数据
+	unsigned char *StartFreqBuf = WriteReadData(strCmd ,14, TRUE);
+	double StartFreqData =  DataProcess(StartFreqBuf);
+	return StartFreqData;
+}
+double MSOWaveFreq::ReadStopFreqData()
+{
+	CString strCmd = "SENSe:FREQuency:STOP?\n";        //读取中心频率数据
+	unsigned char *StopFreqBuf = WriteReadData(strCmd ,14, TRUE);
+	double StopFreqData =  DataProcess(StopFreqBuf);
+	return StopFreqData;
+}
+
+double MSOWaveFreq::DataProcess(unsigned char* dataBuf)
+{
+	char *singleData = new char[7];
+	const char *delim = "e+";  
+	singleData = strtok((char*)dataBuf, delim);
+	float doubData[2];
+	doubData[0] = atof(singleData);
+	singleData = strtok(NULL,delim);
+	doubData[1] = atof(singleData);
+	double data = doubData[0]*pow(10,doubData[1]);
+	return data;
 }
 
 int MSOWaveFreq::ValueToSp(double value)
 {
 	int result;
-	result = (int)((m_rcCanvas.Height())/(-10)*value) ;
+	result = (int)((m_rcCanvas.Height())/10/(-10)*value) ;
 	if (result > m_rcCanvas.bottom)
 	{
 		result = m_rcCanvas.bottom;
@@ -241,18 +317,18 @@ void MSOWaveFreq::DrawWave(unsigned char *data)
 {
 	CClientDC dc(this);
 	m_dcLine.BitBlt(0,0,m_rcCanvas.Width(),m_rcCanvas.Height(),&m_dcGrid,0,0,SRCCOPY);                             
-	
+
 	m_dcLine.SelectObject(&m_FreqWavePenCH1);
 	CPoint *pPt = new CPoint[501];
 
-	unsigned char *allData = new unsigned  char[7515];
-	memset(allData, 0 ,7515);
+	//unsigned char *allData = new unsigned  char[7515];  //在这里创建数组会造成运行时内存不断增加
+	//memset(allData, 0 ,7515);
 	char *singleData = new char[15];
 	//allData = ReadData();
 	//allData[7515] = '\0';
 	allData = data;
 	float doubData[501];
-	//int multData[501];
+	int multData[501];
 	const char *delim = "e,";  
 	singleData = strtok((char*)allData, delim);
 	doubData[0] = atof(singleData);
@@ -264,13 +340,17 @@ void MSOWaveFreq::DrawWave(unsigned char *data)
 		{
 			doubData[len/2] = atof(singleData);
 		}
+		else if(1 ==len%2 && singleData)
+		{
+			multData[len/2] = atof(singleData);
+		}
 		len++;
 	}
 
 	len--;
 	for (int i=0; i<501; i=i+1)
 	{
-		pPt[i].y = ValueToSp(doubData[i]);
+		pPt[i].y = ValueToSp(doubData[i]*pow(10.0,(int)multData[i]));
 		//pPt[i].x =m_rcCanvas.left+m_rcCanvas.Width()*i/(len/2);
 		pPt[i].x =m_rcCanvas.left+i*2.49;
 	}

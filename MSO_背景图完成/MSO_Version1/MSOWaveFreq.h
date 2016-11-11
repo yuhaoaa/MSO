@@ -13,8 +13,13 @@ public:
 	void InitiaDrawTools();
 	void InitialBackGround();
 	void OpenDevice();
+    unsigned char * WriteReadData(CString str ,INT len, BOOL WriteOrRead);
+	double DataProcess(unsigned char* dataBuf);
 	void ChooseFreqDemod();
-    unsigned char *ReadData();
+    unsigned char *ReadFreqData();
+	double ReadCenterFreqData();
+	double ReadStartFreqData();
+	double ReadStopFreqData();
 	void DrawWave(unsigned char *data);
 	int ValueToSp(double value);
 public:
@@ -24,7 +29,9 @@ public:
 	CDC m_dcGrid;	                                                           //表格边框设备环境DC
 	CBitmap m_bitmapGrid ;                                                  //表格边框设备环境缓冲位图
 	CBitmap *m_pOldBitmapGrid;
-
+	unsigned char *RecBuf ;                                                  //ReadData函数返回的数组
+	unsigned char *allData;                                                   //DrawWave中用来画图的数组
+	//unsigned char *CenterFreqBuf;
 	//用来画线的设备环境
 	CDC m_dcLine;  	                                                           //画线设备DC
 	CBitmap m_bitmapLine;                                                      //画线设备环境缓冲位图

@@ -145,6 +145,16 @@ BOOL CMSO_Version1Dlg::OnInitDialog()
 	m_timeRect.right=rect.right-20;
 	m_timeRect.top =  rect.bottom-40;
 	m_timeRect.bottom= rect.bottom-3;
+	//初始化中心频率窗口
+	m_CenterFreqRect.left = rect.left + 440;
+	m_CenterFreqRect.right = rect.left + 640;
+	m_CenterFreqRect.top = rect.top + 670;
+	m_CenterFreqRect.bottom = rect.top + 690;
+	//初始化RBW窗口
+	m_RBWRect.left = rect.left + 700;
+	m_RBWRect.right = rect.left + 915;
+	m_RBWRect.top = rect.top + 670;
+	m_RBWRect.bottom = rect.top + 707;
 
 	InitializeCriticalSection(&m_criticalSection);//用于保护对硬件的操作
 	m_hEventRunnig = CreateEvent(NULL, TRUE, FALSE, NULL);      //控制采数线程的挂起和恢复
@@ -239,12 +249,79 @@ void  CMSO_Version1Dlg::DrawTimeRect(CDC *m_dc)
 	m_dc->SetTextColor(RGB(255,255,255));  //设置颜色
 	m_dc->DrawText(Tstr,  m_timeRect,   DT_NOCLIP| DT_LEFT);
 }
+//画频谱的中心频率显示框
+void CMSO_Version1Dlg::DrawCenterFreqRect(CDC *m_dc)
+{
+	pOldPen = m_dc->SelectObject(&m_penWhite);
+	pOldBrush = m_dc->SelectObject(&m_brushBlack);
+	m_dc->RoundRect(m_CenterFreqRect,CPoint(10,10));  //绘制带边框的矩形
+
+	//读取频谱仪中心频谱显示
+	m_dc->SetBkMode(TRANSPARENT);  //设置背景透明
+	m_dc->SetTextColor(RGB(255,170,0));  //设置颜色
+	double m_centerFreqdata = m_waveFreqCanves.ReadCenterFreqData();
+	CString str1,str;
+	if (m_centerFreqdata>=100000000) 
+	{
+		m_centerFreqdata = m_centerFreqdata/1000000000;
+		str1.Format(_T("%.9f"), m_centerFreqdata);
+		str = _T("  Center :   ")+str1+_T("GHz");
+	}
+	else if(m_centerFreqdata>=1000000)
+	{
+		m_centerFreqdata = m_centerFreqdata/1000000;
+		str1.Format(_T("%.6f"), m_centerFreqdata);
+		str = _T("  Center :   ")+str1+_T("MHz");
+	}
+	else if (m_centerFreqdata>=1000)
+	{
+		m_centerFreqdata = m_centerFreqdata/1000;
+		str1.Format(_T("%.3f"), m_centerFreqdata);
+		str = _T("  Center :   ")+str1+_T("KHz");
+	}
+	m_dc->DrawText(str,  m_CenterFreqRect,   DT_NOCLIP| DT_LEFT);
+}
+
+//画频谱的RBW显示框
+void CMSO_Version1Dlg::DrawRBWRect(CDC *m_dc)
+{
+	pOldPen = m_dc->SelectObject(&m_penWhite);
+	pOldBrush = m_dc->SelectObject(&m_brushBlack);
+	m_dc->RoundRect(m_RBWRect,CPoint(10,10));  //绘制带边框的矩形
+	double m_stopFreqdata = m_waveFreqCanves.ReadStopFreqData();
+	double m_startFreqdata = m_waveFreqCanves.ReadStartFreqData();
+	double m_spandata = m_stopFreqdata - m_startFreqdata;
+	m_dc->SetBkMode(TRANSPARENT);  //设置背景透明
+	m_dc->SetTextColor(RGB(255,170,0));  //设置颜色
+	CString str,str1;
+	if (m_spandata >=100000000) 
+	{
+		m_spandata  = m_spandata /1000000000;
+		str1.Format(_T("%.9f"), m_spandata );
+		str = _T("  Span :   ")+str1+_T("GHz\r\n")+_T("  RBW :   3.000000 MHz");
+	}
+	else if(m_spandata >=1000000)
+	{
+		m_spandata  = m_spandata /1000000;
+		str1.Format(_T("%.6f"), m_spandata );
+		str = _T(" Span :   ")+str1+_T("MHz");
+	}
+	else if (m_spandata >=1000)
+	{
+		m_spandata  = m_spandata /1000;
+		str1.Format(_T("%.3f"), m_spandata );
+		str = _T("  Span :   ")+str1+_T("KHz");
+	}
+	m_dc->DrawText(str,  m_RBWRect,   DT_NOCLIP| DT_LEFT);
+}
+
 
 void CMSO_Version1Dlg::OnTimer(UINT_PTR nIDEvent)
 {
 	// TODO: 在此添加消息处理程序代码和/或调用默认值
 	CDC *pDC = GetDC();
 	DrawTimeRect(pDC);
+	ReleaseDC(pDC);
 	CDialogEx::OnTimer(nIDEvent);
 }
 
@@ -259,6 +336,7 @@ void CMSO_Version1Dlg::OnTimer(UINT_PTR nIDEvent)
 void CMSO_Version1Dlg::OnBnClickedButton1()
 {
 	// TODO: 在此添加控件通知处理程序代码
+	CDC *pDC = GetDC();
 	Freqdown=!Freqdown;
 	if (Freqdown)
 	{
@@ -266,19 +344,22 @@ void CMSO_Version1Dlg::OnBnClickedButton1()
 		mainMenuDlg.ShowWindow(SW_HIDE);
 		freqMainMenuDlg.ShowWindow(SW_SHOW);
 		m_waveCanvesSmall.ShowWindow(SW_SHOW);
+		m_waveFreqCanves.OpenDevice();  //打开频谱仪设备
 		m_waveFreqCanves.ShowWindow(SW_SHOW);
-
+		DrawCenterFreqRect(pDC);
+		DrawRBWRect(pDC);
 		SetEvent(m_hEventRunnig);
-	
+	    
 	}
 	else
 	{
+		Invalidate(TRUE); //清除频谱中的Rect
 		m_waveCanves.ShowWindow(SW_SHOW);
 		mainMenuDlg.ShowWindow(SW_SHOW);
 		freqMainMenuDlg.ShowWindow(SW_HIDE);
 		m_waveFreqCanves.ShowWindow(SW_HIDE);
 		m_waveCanvesSmall.ShowWindow(SW_HIDE);
-
+	
 		freqflag = FREQNOMAL;
 		m_waveFreqCanves.ChooseFreqDemod();
 		ResetEvent(m_hEventRunnig);
@@ -289,14 +370,14 @@ void CMSO_Version1Dlg::OnBnClickedButton1()
 UINT CMSO_Version1Dlg::AquisitionThread(LPVOID param)
 {
 	CMSO_Version1Dlg *MSOView = (CMSO_Version1Dlg*)param;
-	g_nData = new unsigned char[7515];
-	MSOView->m_waveFreqCanves.OpenDevice();
+	//g_nData = new unsigned char[7515];
+	//MSOView->m_waveFreqCanves.OpenDevice();
 	while (1)
 	{
 		WaitForSingleObject(MSOView->m_hEventRunnig, INFINITE);
 		//EnterCriticalSection(&MSOView->m_criticalSection); //在频谱窗口关闭时，会出错 因为关闭窗口时已经删除了m_criticalSection
 		MSOView->m_waveFreqCanves.ChooseFreqDemod();
-	    g_nData = MSOView->m_waveFreqCanves.ReadData();
+	    g_nData = MSOView->m_waveFreqCanves.ReadFreqData();
 		g_nData[7515]='\0';
 		SetEvent(MSOView->m_hEventDrawing);
 		//LeaveCriticalSection(&MSOView->m_criticalSection);

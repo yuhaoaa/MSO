@@ -41,6 +41,8 @@ public:
 
 	void InitialDrawTool();   //初始化绘图工具
 	void DrawTimeRect(CDC *m_dc);  //画时间窗口
+	void DrawCenterFreqRect(CDC *m_dc);
+	void DrawRBWRect(CDC *m_dc);
 	static UINT AquisitionThread(LPVOID param);
 	static UINT DrawThread(LPVOID param);
 private:
@@ -48,6 +50,8 @@ private:
 	CRect m_rectSmall;  
 	CRect m_rectFreq;
 	CRect m_timeRect;    //时间Rect
+	CRect m_CenterFreqRect;  //中线频率Rect
+	CRect m_RBWRect;
 
 	CPen m_penWhite;
 	CPen *pOldPen;
